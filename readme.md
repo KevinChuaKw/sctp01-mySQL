@@ -16,7 +16,6 @@ FLUSH PRIVILEGES;
 ```
 
 
-
 SQL has 3 components 
 
 DDL - Data Defination Language (what allows you to create)
