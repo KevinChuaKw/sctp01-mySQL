@@ -123,4 +123,4 @@ alter table Shifts add constraint vetShift foreign key (Vet_id) references Vets(
 
 insert into Shifts (
 day, start_time, end_time,Vet_id
-) value (1, 10-00-00, 12-30-00, 1), (2, 14-00-00, 16-00-00, 3), (1, 08-00-00, 12-00-00, 2); 
+) value (1, "10:00:00", 12-30-00, 1), (2, 14-00-00, 16-00-00, 3), (1, 08-00-00, 12-00-00, 2); 
