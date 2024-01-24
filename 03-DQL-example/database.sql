@@ -175,8 +175,48 @@ where creditLimit !=0
 group by country
 having avg(creditLimit) >10000; 
 
+-- Find the total sales made by each sales person in the year 2003
+select sum(amount), employeeNumber, firstName, LastName from payments 
+join customers 
+on payments.customerNumber = customers.customerNumber
+join employees
+on customers.salesRepEmployeeNumber = employees.employeeNumber
+group by employeeNumber; 
+
+-- We want to sort so the highest grossing salesperson is at the top limit to the top 3
+select sum(amount), employeeNumber, firstName, LastName from payments 
+join customers 
+on payments.customerNumber = customers.customerNumber
+join employees
+on customers.salesRepEmployeeNumber = employees.employeeNumber
+group by employeeNumber
+order by sum(amount) desc 
+limit 3; 
+
+-- We want to order the table based on a requirement 
+select * from customers order by creditLimit; 
+
+-- Change the direction of the sort 
+select * from customers order by creditLimit DESC;
+
+-- We want to sort so the highest grossing salesperson is at the top limit 
+-- to the top 3 not from USA and amount is more than 600000
+select sum(amount), country, employeeNumber, firstName, LastName from payments 
+join customers 
+on payments.customerNumber = customers.customerNumber
+join employees
+on customers.salesRepEmployeeNumber = employees.employeeNumber
+where customers.country !="USA"
+group by employeeNumber, country, firstName, lastName
+having sum(amount) >600000
+order by sum(amount) desc 
+limit 3; 
 
 
+-- Show all customers where credit limit is aboe the average credit limit
+select * from customers where creditLimit >(
+    select avg(creditLimit) from customers
+); 
 
 
 
