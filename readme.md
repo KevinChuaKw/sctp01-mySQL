@@ -18,8 +18,8 @@ FLUSH PRIVILEGES;
 
 SQL has 3 components 
 
-DDL - Data Defination Language (what allows you to create)
-DML - Data Manulipulate Language (CUD in CRUD)
-DQL - Data Query Language (R in CRUD)
+DDL - Data Defination Language (what allows you to create) [To create table / alter table / drop table]
+DML - Data Manulipulate Language (CUD in CRUD) [Insert data into / update name / delete from <table> where <criteria>]
+DQL - Data Query Language (R in CRUD) [Select command]
 
 Must start from gidpod for the database to be intact 
