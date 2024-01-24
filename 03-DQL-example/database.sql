@@ -51,3 +51,139 @@ SELECT * FROM customers where state="NV" and country ="USA" and creditLimit >500
 -- Show all customers from singapore or USA and also have less than 10k credit limit
 SELECT * FROM customers where (country="singapore" or country ="USA") and creditLimit <10000;
 
+-- Selecting from 2 tables 
+SELECT firstName,
+         lastName,
+         addressLine1,
+         addressLine2
+FROM employees
+JOIN offices
+    ON employees.officeCode = offices.officeCode; 
+
+-- For each customer, we want to know the customer name and the first name, 
+-- last name and email of the corresponding sales rep
+SELECT customerName,
+         firstName,
+         lastName,
+         email
+FROM customers
+JOIN employees
+    ON customers.salesRepEmployeeNumber = employees.employeeNumber;
+
+-- When you join 2 tables and there are columns with the same name
+-- You select the column that you want by putting 
+-- the <name of table>.<name of column> to be more specific
+SELECT customerName,
+         firstName as "Sales Rep First Name",
+         lastName as "Sales Rep Last Name",
+         email as "Email"
+FROM customers
+JOIN employees
+    ON customers.salesRepEmployeeNumber = employees.employeeNumber;
+
+-- There are 3 kinds of JOIN
+-- INNER JOIN - standard: Only included in the result if there is a 
+-- matching row on the other table 
+-- LEFT OUTER JOIN - All rows on the lefthand side will be included
+-- RIGHT JOIN - All rows on the righthand side will be included 
+
+-- When you are joining the tables - Usually the smaller table will come first 
+
+-- All customers will be included regardless if they have a sales rep
+SELECT customerName,
+         firstName as "Sales Rep First Name",
+         lastName as "Sales Rep Last Name",
+         email as "Email"
+FROM customers
+LEFT JOIN employees
+    ON customers.salesRepEmployeeNumber = employees.employeeNumber;
+
+-- There is a order to the functions - 
+-- 'join' will go first followed by 
+-- 'where'
+-- 'select'  
+SELECT customerName,
+         firstName as "Sales Rep First Name",
+         lastName as "Sales Rep Last Name",
+         email as "Email"
+FROM customers
+LEFT JOIN employees
+    ON customers.salesRepEmployeeNumber = employees.employeeNumber
+    where country = "USA"; 
+
+-- Get the current date
+select curdate(); 
+
+-- ISO Standard YYYY-MM-DD
+-- Get all payments after 30 June 2003 
+SELECT * FROM payments where paymentDate >"2003-06-30";
+
+-- Get all payments from a specific date range 
+SELECT * FROM payments where paymentDate between "2003-01-01" and "2003-06-30";
+
+-- Getting only the year / month / day compenent in the date
+select year("2003-06-30")
+select month("2003-06-30")
+select day("2003-06-30")
+
+-- Get all payments made in june 2003
+select * from payments where paymentDate where year (paymentDate) = "2003" and month (paymentDate) = "6"
+
+-- Aggregation 
+-- We want to summarise the entire table 
+
+-- When you want to count the number of rows in the table 
+select count(*) employees; 
+
+-- Calculating the average amount of payments 
+SELECT avg(amount)
+FROM payments;
+
+-- Show only unique values with Distinct 
+select distinct (officeCode) from offices; 
+
+-- Showing group by 
+select count(*), officeCode from employees
+group by officeCode; 
+-- Group by happens after the 'where' 
+-- Group by will happen where the employees of the office code and then the count will happen
+
+-- For each office, show their state and country and how many employees there are
+select count(*), employees.officeCode, country, state from employees
+join offices
+on employees.officeCode = offices.officeCode
+group by officeCode, country, state 
+
+-- Show the average credit limit of each country
+-- 1. which table will give us the information that we want? 
+-- 2. what do we want to group by 
+-- 3. select ??? from <table name> group by <criteria to group by>
+-- 4. what do I wan from each group : MIN, MAX, SUM, COUNT, AVG
+-- 5. whatever I group by, I need to selct (vice versa) except the aggregation
+select avg(creditLimit), country from customers 
+group by country; 
+
+-- We only want countries where the credit limit is more than 10,000
+select avg(creditLimit), country from customers 
+group by country
+having avg(creditLimit) >10000; 
+
+-- When we dont want to include customers where the credit limit is 0
+-- before the groupings
+select avg(creditLimit), country from customers 
+where creditLimit !=0 
+group by country
+having avg(creditLimit) >10000; 
+
+
+
+
+
+
+
+
+
+
+
+
+
