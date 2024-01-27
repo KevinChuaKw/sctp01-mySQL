@@ -38,8 +38,11 @@ WHERE officeCode IN (1,2,3)
 -- customer with the customer number 124, along 
 -- with the customer name, the contact's 
 -- first name and contact's last name.
-
-
+SELECT *
+FROM customers
+JOIN orders
+    ON customers.customerNumber = orders.customerNumber
+WHERE customers.customerNumber = 124;
 
 -- 6 - Show the name of the product, 
 -- together with the order details,  for each order 
@@ -47,19 +50,29 @@ WHERE officeCode IN (1,2,3)
 
 
 
--- 7 - Display sum of all the payments made by each company from the USA. 
+-- 7 - Display sum of all the payments made by each 
+-- company from the USA. 
+SELECT sum(amount),
+         country
+FROM payments
+JOIN customers
+    ON payments.customerNumber = customers.customerNumber
+WHERE country = 'usa'
+GROUP BY  customers.country;
+
+
+-- 8 - Display all orders made by customers from the 
+-- USA and UK
 
 
 
--- 8 - Display all orders made by customers from the USA and UK
+-- 9 - Show how many employees are there for each state 
+-- in the USA		
 
 
 
--- 9 - Show how many employees are there for each state in the USA		
-
-
-
--- 10 - Display the number of orders made, per month, between Jan 2003 and Dec 2003
+-- 10 - Display the number of orders made, per month, 
+-- between Jan 2003 and Dec 2003
 
 
 
@@ -78,3 +91,20 @@ WHERE officeCode IN (1,2,3)
 -- 14  - For each product, display how many times it was ordered, and display the results with the most orders first and only show the top ten.
 
 
+
+-- Lab 4.1B
+
+-- Which employees have a phone extension that ends with "11"?
+-- What are the names, contact first name and contact last name of all customers in France?
+-- Which products have a product code that starts with the letter "S" and also have a list price greater than 80.00?
+-- What are the names and emails of all employees who work in the New York Office?
+-- What are the names and phone numbers of all employees who work in offices located outside of the United States?
+-- What are the first name and last names of all employees hired before 1st Jan 2003?
+-- Display all orders which shipped later than their required date
+-- Show all orders with a status of "Cancelled" that were placed before December 31, 2004?
+-- Which product has a product line of "Motorcycles" and has a quantity in stock less than 10?
+-- What are the names and emails of all customers who have placed an order that has "car" in the product name?
+-- Display the average credit limit and number of customers for each country, only for countries more than 5 customers
+-- Display the total number of orders placed per month, along with the month and year
+-- Display the total amount of sales (in terms of revenue earned) of each order, along with the order date and customer name
+-- Display the total number of orders, total sales amount and average sales aount per product line
