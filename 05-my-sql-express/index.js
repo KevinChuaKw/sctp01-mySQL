@@ -10,7 +10,6 @@ let app = express();
 app.use(express.urlencoded({ extended: false }));
 
 // Set up Handlebars
-app.engine('hbs');
 app.set('view engine', 'hbs');
 
 // Use Wax-On for additional Handlebars helpers
@@ -26,10 +25,23 @@ async function main() {
         password: process.env.DB_PASSWORD
     });
 
-    app.get('/', function(req, res) {
-        // Render using Handlebars template
-        res.render('home');
+    app.get('/customers', async function(req, res) {
+        // we want the first element from the array returned from connection.execute
+        const [customers] = await connection.execute("SELECT * from Customers");
+        // same 
+        res.render('customers/index',{
+            customers
+        }); 
     });
+
+    app.get('/customers/create', async function (req,res){
+        const [companies] = await connection.execute("SELECT * from Companies");
+        res.render("customers/create"); 
+            companies; 
+    });
+
+
+
 }
 main();
 

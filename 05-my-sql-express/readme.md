@@ -15,3 +15,11 @@
     ```
     USE crm;
     ```
+
+
+
+Object destructuring 
+let [a,o,p,z] = fruits
+The order matters within the array
+
+let {firstName, lastName, age } = req.body
