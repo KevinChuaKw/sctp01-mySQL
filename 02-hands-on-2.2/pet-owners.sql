@@ -57,7 +57,6 @@ insert into Diagnosis (
 values ("Pet is alive and breathing", 1), ("Pet is still alive and breathing", 1),("Why is this pet still breathing",1);
 
 
-
 create table Vets (
     id int unsigned auto_increment primary key,
     first_name varchar(300) not null, 

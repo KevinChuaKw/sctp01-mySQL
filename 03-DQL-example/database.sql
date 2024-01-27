@@ -25,14 +25,14 @@ select customerName, contactLastName, contactFirstName, country from customers w
 SELECT * FROM employees where jobTitle like 'Sales Rep'; 
 -- The string for Sales Rep is case insensitive
 
--- Select al employees where the jobTitle is "<anything>sales"
+-- Select all employees where the jobTitle is "<anything>sales"
 SELECT * FROM employees where jobTitle like '%Sales'; 
 -- The 'space' is also accounted for in the "%" sign 
 
--- Select al employees where the jobTitle is "sales<anything>"
+-- Select all employees where the jobTitle is "sales<anything>"
 SELECT * FROM employees where jobTitle like 'Sales%'; 
 
--- Select al employees where the jobTitle is "<anything>sales<anything>"
+-- Select all employees where the jobTitle is "<anything>sales<anything>"
 SELECT * FROM employees where jobTitle like '%Sales%'; 
 
 -- Find all orders which mentioned the word shipping in the comments and display their order
