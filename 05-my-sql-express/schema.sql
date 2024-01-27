@@ -1,6 +1,6 @@
 
 -- SQL Schema for Financial Advising Company
-USE crm: 
+USE crm; 
 -- 'crm' needs to be changed to the relevant 
 -- database name that you are using
 
