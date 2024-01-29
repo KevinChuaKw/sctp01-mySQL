@@ -76,7 +76,9 @@ GROUP BY  customers.country;
 
 
 
--- 11 - From the payments table, display the average amount spent by each customer. Display the name of the customer as well.
+-- 11 - From the payments table, display the average
+--  amount spent by each customer. Display the name 
+-- of the customer as well.
 
 
 
@@ -84,27 +86,76 @@ GROUP BY  customers.country;
 
 
 
--- 13 - From the payments table, display the average amount spent by each customer but only if the customer has spent a minimum of average 10,000 dollars.
+-- 13 - From the payments table, display the average 
+-- amount spent by each customer but only if the customer 
+-- has spent a minimum of average 10,000 dollars.
 
 
 
--- 14  - For each product, display how many times it was ordered, and display the results with the most orders first and only show the top ten.
+-- 14  - For each product, display how many times it was 
+-- ordered, and display the results with the most orders 
+-- first and only show the top ten.
 
 
 
 -- Lab 4.1B
 
--- Which employees have a phone extension that ends with "11"?
--- What are the names, contact first name and contact last name of all customers in France?
--- Which products have a product code that starts with the letter "S" and also have a list price greater than 80.00?
--- What are the names and emails of all employees who work in the New York Office?
--- What are the names and phone numbers of all employees who work in offices located outside of the United States?
--- What are the first name and last names of all employees hired before 1st Jan 2003?
--- Display all orders which shipped later than their required date
--- Show all orders with a status of "Cancelled" that were placed before December 31, 2004?
--- Which product has a product line of "Motorcycles" and has a quantity in stock less than 10?
--- What are the names and emails of all customers who have placed an order that has "car" in the product name?
--- Display the average credit limit and number of customers for each country, only for countries more than 5 customers
--- Display the total number of orders placed per month, along with the month and year
--- Display the total amount of sales (in terms of revenue earned) of each order, along with the order date and customer name
--- Display the total number of orders, total sales amount and average sales aount per product line
+-- Which employees have a phone extension 
+-- that ends with "11"?
+
+
+-- What are the names, contact first name and 
+-- contact last name of all customers in France?
+
+
+-- Which products have a product code that starts 
+-- with the letter "S" and also have a list 
+-- price greater than 80.00?
+
+
+-- What are the names and emails of all employees 
+-- who work in the New York Office?
+
+
+-- What are the names and phone numbers of all 
+-- employees who work in offices located outside of the United States?
+
+
+-- What are the first name and last names 
+-- of all employees hired before 1st Jan 2003?
+
+
+-- Display all orders which shipped later 
+-- than their required date
+
+
+-- Show all orders with a status of "Cancelled" 
+-- that were placed before December 31, 2004?
+
+
+-- Which product has a product line of "Motorcycles" 
+-- and has a quantity in stock less than 10?
+
+
+-- What are the names and emails of all customers 
+-- who have placed an order that has "car" 
+-- in the product name?
+
+
+-- Display the average credit limit and number 
+-- of customers for each country, only for 
+-- countries more than 5 customers
+
+
+-- Display the total number of orders placed per 
+-- month, along with the month and year
+
+
+-- Display the total amount of sales (in terms of 
+-- revenue earned) of each order, along with 
+-- the order date and customer name
+
+
+-- Display the total number of orders, total sales 
+-- amount and average sales aount per product line
+
