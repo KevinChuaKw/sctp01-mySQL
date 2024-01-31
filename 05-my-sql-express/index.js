@@ -3,6 +3,9 @@ const mysql2 = require('mysql2/promise');
 const dotenv = require('dotenv');
 const hbs = require('hbs');
 const wax = require('wax-on');
+const handlebarsHelpers = require('handlebars-helpers')({
+    'handlebars':hbs.handlebars
+}); 
 
 dotenv.config();
 
@@ -51,6 +54,8 @@ async function main() {
 
         const bindings = [first_name, last_name, parseInt(rating), parseInt(company_id)];
         await connection.execute (query, bindings); 
+
+        
         res.redirect('/customers'); 
 
 
@@ -81,7 +86,7 @@ async function main() {
         });
     })
 
-    // Delete
+    // Delete or soft delete
     app.get('/customers/:customers_id/delete', async function (req,res){
         const sql = "select * from Customers where customer_id = ?";
         
@@ -94,13 +99,42 @@ async function main() {
         })
     })
 
+    // For this to be secure, there must be JWT autentication
+    // and there must be differnations between access rights 
+    // Do not use auto_increment for primary key but use UUID (Universal Unique ID)
+    // UUID cannot not found using a forloop 
+    // UUID are strings 
+    // Better to use UUID - Food for thought
+    app.post('/customers/:customer_id/delete', async function (req,res){
+        const query = "delete from Customers where customer_id = ?"; 
+        await connection.execute(query, [req.params.customer_id]); 
+        res.redirect('/customers'); 
 
+    })
 
+    // Update 
+    app.get('/customers/:customer_id/update', async function (req,res){
+        const query = "select * from Customers where customer_id = ?"; 
+        const [customers] = await connection.execute(query, [req.params.customer_id]); 
+        const customer = customers[0]
+        const [companies] = await connection.execute(`select * from Companies`); 
 
+        res.render('customers/update', {
+            customer, companies
+        }); 
+    })
 
-    
-
-
+    app.post('/customers/:customer_id/update', async function (req,res){
+        const {first_name, last_name, rating, company_id} = req.body;
+        const query = `UPDATE Customers set first_name=?,
+                                            last_name=?,
+                                            rating=?,
+                                            company_id=?
+                                            where customer_id = ?`; 
+        const bindings = [first_name, last_name, rating, company_id, req.params.customer_id];
+        await connection.execute(query, bindings);
+        res.redirect('/customers');  
+    })
 
 }
 main();

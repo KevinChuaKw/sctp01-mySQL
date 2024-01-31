@@ -4,6 +4,7 @@
 * mysql2
 * hbs
 * wax-on
+* handlebars-helpers
 
 # Setup steps
 1. Create a new database in MySQL (for our example, we use `crm`).
