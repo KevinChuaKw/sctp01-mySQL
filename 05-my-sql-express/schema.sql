@@ -10,7 +10,6 @@ CREATE TABLE Companies (
     name VARCHAR(255) NOT NULL,
     description TEXT
 );
-
 -- Creating Customers Table
 CREATE TABLE Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,

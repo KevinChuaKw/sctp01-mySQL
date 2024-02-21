@@ -1,4 +1,4 @@
--- Show al database in your SQL server
+-- Show all database in your SQL server
 show databases; 
 
 -- create a new database
