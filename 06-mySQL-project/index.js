@@ -22,18 +22,49 @@ async function main() {
         password: process.env.DB_PASSWORD
     });
 
-    app.get('/watch', async function (req,res){
-        const [watch] = await connection.execute ("Select * from watch");
-        res.json(watch); 
+    connection.connect((err) => {
+        if(err){
+            console.error("Error connecting to MySQL database");
+            return; 
+        } 
+        console.log("MySQL database connected"); 
     })
 
-    // display form to create new watch
-    app.get('/watch/create', async function(req,res){
-        const 
-        res.render('watch/create',{
-            
+    app.get('/watch', async function (req,res){
+        // we want the first element from the array returned from connection.execute
+        const [watch] = await connection.execute ("Select * from watch");
+        console.log(watch); 
+        res.render('watch/index',{
+            watch
         })
-    })
+    }); 
+
+    // displaying the form to create a new watch
+    app.get('/watch/create', async function (req,res){
+        const [watch] = await connection.execute('select * from watch'); 
+        res.render("watch/create",{
+            watch
+        });
+    }); 
+
+    // process the form to create a new watch
+    app.post('/customer/create', async function (req,res){
+        const {brand, model, state_of_watch, price, date_of_watch} = req.body;
+        const query = `
+            insert into watch (brand, model, state_of_watch, price, date_of_watch) 
+            values (?,?,?,?,?)`;
+        // prepare the values in order of the question marks in the query
+        const bindings = [brand, model, state_of_watch, parseInt(price), date_of_watch];
+        await connection.execute (query, bindings); 
+        res.redirect("/watch"); 
+    }); 
+
+    // Search within watch 
+
+
+
+
+    // Delete within watch 
 
 }
 main();
