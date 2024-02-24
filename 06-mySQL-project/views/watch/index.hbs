@@ -14,11 +14,11 @@
     <tbody>
         {{#each watch}}
         <tr>
-            <td>{{this.watch.brand}}</td>
-            <td>{{this.watch.model}}</td>
-            <td>{{this.watch.state_of_watch}}</td>
-            <td>{{this.watch.price}}</td>
-            <td>{{this.watch.date_of_watch}}</td>
+            <td>{{this.brand}}</td>
+            <td>{{this.model}}</td>
+            <td>{{this.state_of_watch}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.date_of_watch}}</td>
             <td>
                 <a href="/watch/{{this.watch_id}}/delete" class="btn btn-danger btn-sm">Delete</a>
                 <a href="/watch/{{this.watch_id}}/update" class="btn btn-success btn-sm">Update</a>
