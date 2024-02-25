@@ -33,6 +33,7 @@ async function main() {
     app.get('/watch', async function (req,res){
         // we want the first element from the array returned from connection.execute
         const [watch] = await connection.execute ("Select * from watch");
+
         console.log(watch); 
         res.render('watch/index',{
             watch
@@ -48,7 +49,7 @@ async function main() {
     }); 
 
     // process the form to create a new watch
-    app.post('/customer/create', async function (req,res){
+    app.post('/watch/create', async function (req,res){
         const {brand, model, state_of_watch, price, date_of_watch} = req.body;
         const query = `
             insert into watch (brand, model, state_of_watch, price, date_of_watch) 
@@ -60,7 +61,9 @@ async function main() {
     }); 
 
     // Search within watch 
-
+    app.get('/watch/search', async function (req,res){
+        let sql = ""
+    })
 
 
 
