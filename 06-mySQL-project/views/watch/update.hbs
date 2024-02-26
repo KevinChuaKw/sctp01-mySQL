@@ -1,0 +1,35 @@
+{{#extends "base"}}
+{{#block "content"}}
+<h2>Watch Form</h2>
+<form method="post"> <!-- Replace /your-endpoint with your form submission endpoint -->
+    <div class="mb-3">
+        <label for="brand" class="form-label">Brand</label>
+        <input type="text" class="form-control" id="brand" name="brand" value="{{watch.brand}}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="model" class="form-label">model</label>
+        <input type="text" class="form-control" id="model" name="model" value="{{watch.model}}" required>
+    </div>
+    <div>
+        <label>State of Watch:</label>
+        <input type="radio" name="state_of_watch" value="new" {{#eq postingToEdit.watch "new"
+            }}checked{{/eq}} /><label>New</label>
+        <input type="radio" name="state_of_watch" value="used" {{#eq postingToEdit.watch "used"
+            }}checked{{/eq}} /><label>Used</label>
+        <input type="radio" name="state_of_watch" value="vintage" {{#eq postingToEdit.watch "vintage"
+            }}checked{{/eq}} /><label>Vintage</label>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" class="form-control" id="price" name="price" value="{{watch.price}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="date_of_watch" class="form-label">Date of Watch</label>
+        <input type="text" class="form-control" id="date_of_watch" name="date_of_watch" value="{{watch.date_of_watch}}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{{/block}}
+{{/extends}}
