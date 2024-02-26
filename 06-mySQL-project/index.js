@@ -68,15 +68,21 @@ async function main() {
 
 
     // Delete within watch 
-    app.get('/watch/watch_id/delete', async function (req,res){
+    app.get('/watch/:watch_id/delete', async function (req,res){
         const sql = "select * from watch where watch_id = ?"; 
-        const [watch] = await connection.execute(sql ,[req.params.watch_id]);
-        const deleteWatch = watch[0];
+        const [watches] = await connection.execute(sql ,[req.params.watch_id]);
+        console.log(watches);
+        const watch = watches[0];
         res.render('watch/delete',{
             watch,
         })
     }); 
 
+    app.post('/watch/:watch_id/delete', async function (req,res){
+        const query = "delete from watch where watch_id =?";
+        await connection.execute(query, [req.params.watch_id]);
+        res.redirect('/watch');
+    }); 
     // Update within watch
 }
 main();
