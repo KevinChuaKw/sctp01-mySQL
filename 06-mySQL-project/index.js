@@ -68,7 +68,16 @@ async function main() {
 
 
     // Delete within watch 
+    app.get('/watch/watch_id/delete', async function (req,res){
+        const sql = "select * from watch where watch_id = ?"; 
+        const [watch] = await connection.execute(sql ,[req.params.watch_id]);
+        const deleteWatch = watch[0];
+        res.render('watch/delete',{
+            watch,
+        })
+    }); 
 
+    // Update within watch
 }
 main();
 
