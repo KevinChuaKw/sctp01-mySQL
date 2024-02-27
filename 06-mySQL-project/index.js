@@ -95,7 +95,6 @@ async function main() {
         })
     })
     
-    
     app.post('/watch/:watch_id/update', async function (req,res){
         const {brand, model, state_of_watch, price, date_of_watch} = req.body; 
         const watch_id = req.params.watch_id;
@@ -104,8 +103,6 @@ async function main() {
         await connection.execute(query, bindings);
         res.redirect('/watch');
     })
-
-
 
     // 
 
