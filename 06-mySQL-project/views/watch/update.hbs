@@ -1,6 +1,6 @@
 {{#extends "base"}}
 {{#block "content"}}
-<h2>Watch Form</h2>
+<h1>Watch Form</h1>
 <form method="post"> <!-- Replace /your-endpoint with your form submission endpoint -->
     <div class="mb-3">
         <label for="brand" class="form-label">Brand</label>
@@ -13,11 +13,11 @@
     </div>
     <div>
         <label>State of Watch:</label>
-        <input type="radio" name="state_of_watch" value="new" {{#eq postingToEdit.watch "new"
+        <input type="radio" name="state_of_watch" value="new" {{#eq watch.state_of_watch "new"
             }}checked{{/eq}} /><label>New</label>
-        <input type="radio" name="state_of_watch" value="used" {{#eq postingToEdit.watch "used"
+        <input type="radio" name="state_of_watch" value="used" {{#eq watch.state_of_watch "used"
             }}checked{{/eq}} /><label>Used</label>
-        <input type="radio" name="state_of_watch" value="vintage" {{#eq postingToEdit.watch "vintage"
+        <input type="radio" name="state_of_watch" value="vintage" {{#eq watch.state_of_watch "vintage"
             }}checked{{/eq}} /><label>Vintage</label>
     </div>
     <div class="mb-3">
@@ -25,7 +25,7 @@
         <input type="text" class="form-control" id="price" name="price" value="{{watch.price}}" required>
     </div>
     <div class="mb-3">
-        <label for="date_of_watch" class="form-label">Date of Watch</label>
+        <label for="date_of_watch" class="form-label">Date of Watch [YYYY-MM-DD]</label>
         <input type="text" class="form-control" id="date_of_watch" name="date_of_watch" value="{{watch.date_of_watch}}" required>
     </div>
 

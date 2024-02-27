@@ -60,6 +60,7 @@ async function main() {
         res.redirect("/watch"); 
     }); 
 
+
     // Search within watch 
     app.get('/watch/search', async function (req,res){
         let sql = ""
@@ -83,12 +84,13 @@ async function main() {
         res.redirect('/watch');
     }); 
     
+
     // Update within watch
-    app.get('watch/:watch_id/update', async function (req,res){
+    app.get('/watch/:watch_id/update', async function (req,res){
         const query = "select * from watch where watch_id =?";
         const [watches] = await connection.execute(query, [req.params.watch_id]);
         const watch = watches[0];
-        res.render('/watch/update',{
+        res.render('watch/update',{
             watch
         })
     })
@@ -96,16 +98,12 @@ async function main() {
     
     app.post('/watch/:watch_id/update', async function (req,res){
         const {brand, model, state_of_watch, price, date_of_watch} = req.body; 
-        const query = `update watch set brand=?,
-                                        model=?,
-                                        state_of_watch=?,
-                                        price=?,
-                                        date_of_watch=?
-                                        where watch_id=?`; 
+        const query = "UPDATE watch SET brand=?, model=?, state_of_watch=?, price=?, date_of_watch=? WHERE watch_id=?";
         const bindings = [brand, model, state_of_watch, parseInt(price), date_of_watch];
         await connection.execute(query, bindings);
         res.redirect('/watch');
     })
+
 
 
     // 
