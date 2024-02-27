@@ -98,8 +98,9 @@ async function main() {
     
     app.post('/watch/:watch_id/update', async function (req,res){
         const {brand, model, state_of_watch, price, date_of_watch} = req.body; 
+        const watch_id = req.params.watch_id;
         const query = "UPDATE watch SET brand=?, model=?, state_of_watch=?, price=?, date_of_watch=? WHERE watch_id=?";
-        const bindings = [brand, model, state_of_watch, parseInt(price), date_of_watch];
+        const bindings = [brand, model, state_of_watch, parseInt(price), date_of_watch, watch_id];
         await connection.execute(query, bindings);
         res.redirect('/watch');
     })
