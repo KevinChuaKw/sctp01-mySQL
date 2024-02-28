@@ -30,6 +30,12 @@ async function main() {
         console.log("MySQL database connected"); 
     })
 
+    // Doing home page for all routes 
+    app.get('/', async function (req,res){
+        res.render('home/index'); 
+    }); 
+
+    // Doing watch home page
     app.get('/watch', async function (req,res){
         // we want the first element from the array returned from connection.execute
         const [watch] = await connection.execute ("Select * from watch");
@@ -39,6 +45,21 @@ async function main() {
             watch
         })
     }); 
+
+    // Search within watch 
+    app.get('/watch/search', async function (req,res){
+        let sql = "select * from watch where 1"; 
+        const bindings = [];
+        if (req.query.searchTerms){
+            sql += `and (brand like ? or model like ?)`;
+            bindings.push(`%${req.query.searchTerms}%`); 
+            bindings.push(`%${req.query.searchTerms}%`); 
+        }
+        const [watch] = await connection.execute(sql,bindings);
+        res.render('watch/search',{
+            watch
+        });
+    });
 
     // displaying the form to create a new watch
     app.get('/watch/create', async function (req,res){
@@ -59,14 +80,6 @@ async function main() {
         await connection.execute (query, bindings); 
         res.redirect("/watch"); 
     }); 
-
-
-    // Search within watch 
-    app.get('/watch/search', async function (req,res){
-        let sql = ""
-    })
-
-
 
     // Delete within watch 
     app.get('/watch/:watch_id/delete', async function (req,res){

@@ -1,11 +1,21 @@
 {{#extends "base"}}
+
 {{#block "content"}}
+<form method="GET">
+    <label for="model" class="form-label">Model</label>
+    <input type="text" name="searchTerms" class="form-control" />
+
+    <label for="model" class="form-label">Brand</label>
+    <input type="text" name="searchTerms" class="form-control" />
+
+    <input type="submit" class="btn btn-primary mt-2 ms-2" value="Search" />
+</form>
 
 <table class="table">
     <thead>
         <tr>
-            <td>Brand</td>
             <td>Model</td>
+            <td>Brand</td>
             <td>State of Watch</td>
             <td>Price</td>
             <td>Date of Watch</td>
@@ -14,27 +24,15 @@
     <tbody>
         {{#each watch}}
         <tr>
-            <td>{{this.brand}}</td>
             <td>{{this.model}}</td>
+            <td>{{this.brand}}</td>
             <td>{{this.state_of_watch}}</td>
             <td>{{this.price}}</td>
             <td>{{this.date_of_watch}}</td>
-            <td>
-                <a href="/watch/{{this.watch_id}}/delete" class="btn btn-danger btn-sm">Delete</a>
-                <a href="/watch/{{this.watch_id}}/update" class="btn btn-success btn-sm">Update</a>
-            </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-
-<form action="/watch/search" method="get">
-    <button type="submit">Search</button>
-</form>
-
-<form action="/watch/create" method="get" style="margin-top: 10px;">
-    <button type="submit">Create</button>
-</form>
-
 {{/block}}
+
 {{/extends}}
