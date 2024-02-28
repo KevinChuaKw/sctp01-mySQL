@@ -52,7 +52,7 @@ async function main() {
         let sql = "select * from watch where 1"; 
         const bindings = [];
         if (req.query.searchTerms){
-            sql += `and (brand like ? or model like ?)`;
+            sql += ` and (brand like ? or model like ?)`;
             bindings.push(`%${req.query.searchTerms}%`); 
             bindings.push(`%${req.query.searchTerms}%`); 
         }
@@ -66,7 +66,7 @@ async function main() {
         let sql = "select * from watch where 1"; 
         const bindings = [];
         if (req.query.searchTerms){
-            sql += `and (brand like ? or model like ?)`;
+            sql += ` and (brand like ? or model like ?)`;
             bindings.push(`%${req.query.searchTerms}%`); 
             bindings.push(`%${req.query.searchTerms}%`); 
         }
