@@ -35,12 +35,13 @@ async function main() {
         res.render('home/index'); 
     }); 
 
+    app.get('/home', async function (req,res){
+        res.render('home/index'); 
+    }); 
+
     // Doing watch home page
     app.get('/watch', async function (req,res){
-        // we want the first element from the array returned from connection.execute
         const [watch] = await connection.execute ("Select * from watch");
-
-        console.log(watch); 
         res.render('watch/index',{
             watch
         })
@@ -117,7 +118,61 @@ async function main() {
         res.redirect('/watch');
     })
 
-    // 
+    // Doing customer home page
+    app.get('/customer', async function (req,res){
+        const [customer] = await connection.execute ("Select * from customer"); 
+        console.log(customer);
+        res.render('customer/index',{
+            customer
+        })
+    }); 
+
+    // displaying the form to create a new customer
+    app.get('/customer/create', async function (req,res){
+        const [customer] = await connection.execute('select * from customer'); 
+        res.render("customer/create",{
+            customer
+        });
+    }); 
+
+    // process the form to create a new customer
+    app.post('/customer/create', async function (req,res){
+        const {first_name, last_name, address, email, phone_number} = req.body;
+        const query = `
+            insert into customer (first_name, last_name, address, email, phone_number) 
+            values (?,?,?,?,?)`;
+        // prepare the values in order of the question marks in the query
+        const bindings = [first_name, last_name, address, email, phone_number];
+        await connection.execute (query, bindings); 
+        res.redirect("/customer"); 
+    }); 
+
+    // Delete within customer
+    app.get('/customer/:watch_id/delete', async function (req,res){
+        const sql = "select * from customer where customer_id = ?"; 
+        const [customers] = await connection.execute(sql ,[req.params.customer_id]);
+        const customer = customers[0];
+        res.render('customer/delete',{
+            customer,
+        })
+    }); 
+
+    app.post('/customer/:customer_id/delete', async function (req,res){
+        const query = "delete from customer where customer_id =?";
+        await connection.execute(query, [req.params.customer_id]);
+        res.redirect('/customer');
+    }); 
+
+
+    // Doing transaction home page
+    app.get('/transaction', async function (req,res){
+        const [transaction] = await connection.execute ("Select * from transaction"); 
+        res.render('transaction/index',{
+            transaction
+        })
+    }); 
+
+    
 
 
 

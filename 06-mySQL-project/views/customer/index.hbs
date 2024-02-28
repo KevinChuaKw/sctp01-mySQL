@@ -1,0 +1,40 @@
+{{#extends "base"}}
+{{#block "content"}}
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Address</td>
+            <td>email</td>
+            <td>Phone Number</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each customer}}
+        <tr>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.address}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone_number}}</td>
+            <td>
+                <a href="/customer/{{this.customer_id}}/delete" class="btn btn-danger btn-sm">Delete</a>
+                <a href="/customer/{{this.customer_id}}/update" class="btn btn-success btn-sm">Update</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/customer/search" method="get">
+    <button type="submit">Search</button>
+</form>
+
+<form action="/customer/create" method="get" style="margin-top: 10px;">
+    <button type="submit">Create</button>
+</form>
+
+{{/block}}
+{{/extends}}
