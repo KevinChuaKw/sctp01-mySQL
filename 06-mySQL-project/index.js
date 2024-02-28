@@ -48,28 +48,53 @@ async function main() {
     }); 
 
     // Search within watch 
+    // app.get('/watch/search', async function (req,res){
+    //     let sql = "select * from watch where 1"; 
+    //     const bindings = [];
+    //     if (req.query.searchTerms){
+    //         sql += ` and (brand like ? or model like ?)`;
+    //         bindings.push(`%${req.query.searchTerms}%`); 
+    //         bindings.push(`%${req.query.searchTerms}%`); 
+    //     }
+    //     const [watch] = await connection.execute(sql,bindings);
+    //     res.render('watch/search',{
+    //         watch
+    //     });
+    // });
+
+    // app.post('/watch/search', async function (req,res){
+    //     let sql = "select * from watch where 1"; 
+    //     const bindings = [];
+    //     if (req.query.searchTerms){
+    //         sql += ` and (brand like ? or model like ?)`;
+    //         bindings.push(`%${req.query.searchTerms}%`); 
+    //         bindings.push(`%${req.query.searchTerms}%`); 
+    //     }
+    //     const [watch] = await connection.execute(sql,bindings);
+    //     res.render('watch/search',{
+    //         watch
+    //     });
+    // });
+
+    // Search within watch (by XJ)
     app.get('/watch/search', async function (req,res){
         let sql = "select * from watch where 1"; 
-        const bindings = [];
-        if (req.query.searchTerms){
-            sql += ` and (brand like ? or model like ?)`;
-            bindings.push(`%${req.query.searchTerms}%`); 
-            bindings.push(`%${req.query.searchTerms}%`); 
-        }
-        const [watch] = await connection.execute(sql,bindings);
+        const [watch] = await connection.execute(sql);
         res.render('watch/search',{
             watch
         });
     });
 
     app.post('/watch/search', async function (req,res){
-        let sql = "select * from watch where 1"; 
+        let sql = "SELECT * FROM watch WHERE 1"; 
         const bindings = [];
-        if (req.query.searchTerms){
-            sql += ` and (brand like ? or model like ?)`;
-            bindings.push(`%${req.query.searchTerms}%`); 
-            bindings.push(`%${req.query.searchTerms}%`); 
+        // This only works if both fields are filled up need to find a way to seperate this
+        if (req.body.brandSearchTerms || req.body.modelSearchTerms){
+            sql += ` AND (brand like ? OR model like ?)`;
+            bindings.push(`%${req.body.brandSearchTerms}%`); 
+            bindings.push(`%${req.body.modelSearchTerms}%`); 
         }
+        console.log(bindings)
         const [watch] = await connection.execute(sql,bindings);
         res.render('watch/search',{
             watch
@@ -193,6 +218,11 @@ async function main() {
 }
 main();
 
-app.listen(3000, () => {
+// app.listen(3000, () => {
+//     console.log("server has started");
+// });
+
+// PORT CHANGED
+app.listen(4000, () => {
     console.log("server has started");
 });

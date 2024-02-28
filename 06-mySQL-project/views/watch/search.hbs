@@ -1,12 +1,12 @@
 {{#extends "base"}}
 
 {{#block "content"}}
-<form method="GET">
+<form method="POST">
     <label for="model" class="form-label">Model</label>
-    <input type="text" name="searchTerms" class="form-control" />
+    <input type="text" name="modelSearchTerms" class="form-control" />
 
-    <label for="model" class="form-label">Brand</label>
-    <input type="text" name="searchTerms" class="form-control" />
+    <label for="brand" class="form-label">Brand</label>
+    <input type="text" name="brandSearchTerms" class="form-control" />
 
     <input type="submit" class="btn btn-primary mt-2 ms-2" value="Search" />
 </form>
