@@ -46,7 +46,7 @@ async function main() {
             watch
         })
     }); 
-    
+
     app.get('/watch/search', async function (req,res){
         let sql = "select * from watch where 1"; 
         const [watch] = await connection.execute(sql);
@@ -59,11 +59,11 @@ async function main() {
         let sql = "SELECT * FROM watch WHERE 1"; 
         const bindings = [];
         // This only works if both fields are filled up need to find a way to seperate this
-        if (req.body.brandSearchTerms || req.body.modelSearchTerms){
+        if (req.body.brandSearchTerms && req.body.modelSearchTerms){
             sql += ` AND (brand like ? OR model like ?)`;
             bindings.push(`%${req.body.brandSearchTerms}%`); 
             bindings.push(`%${req.body.modelSearchTerms}%`); 
-        }
+        } if 
         console.log(bindings)
         const [watch] = await connection.execute(sql,bindings);
         res.render('watch/search',{
