@@ -1,0 +1,34 @@
+{{#extends "base"}}
+{{#block "content"}}
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Watch</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each brand}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.watch_id}}</td>
+            <td>
+                <a href="/brand/{{this.brand_id}}/delete" class="btn btn-danger btn-sm">Delete</a>
+                <a href="/brand/{{this.brand_id}}/update" class="btn btn-success btn-sm">Update</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<form action="/brand/search" method="get">
+    <button type="submit">Search</button>
+</form>
+
+<form action="/brand/create" method="get" style="margin-top: 10px;">
+    <button type="submit">Create</button>
+</form>
+
+{{/block}}
+{{/extends}}

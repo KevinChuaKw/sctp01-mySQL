@@ -62,6 +62,20 @@ async function main() {
         });
     });
 
+    app.post('/watch/search', async function (req,res){
+        let sql = "select * from watch where 1"; 
+        const bindings = [];
+        if (req.query.searchTerms){
+            sql += `and (brand like ? or model like ?)`;
+            bindings.push(`%${req.query.searchTerms}%`); 
+            bindings.push(`%${req.query.searchTerms}%`); 
+        }
+        const [watch] = await connection.execute(sql,bindings);
+        res.render('watch/search',{
+            watch
+        });
+    });
+
     // displaying the form to create a new watch
     app.get('/watch/create', async function (req,res){
         const [watch] = await connection.execute('select * from watch'); 
