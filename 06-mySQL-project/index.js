@@ -46,37 +46,7 @@ async function main() {
             watch
         })
     }); 
-
-    // Search within watch 
-    // app.get('/watch/search', async function (req,res){
-    //     let sql = "select * from watch where 1"; 
-    //     const bindings = [];
-    //     if (req.query.searchTerms){
-    //         sql += ` and (brand like ? or model like ?)`;
-    //         bindings.push(`%${req.query.searchTerms}%`); 
-    //         bindings.push(`%${req.query.searchTerms}%`); 
-    //     }
-    //     const [watch] = await connection.execute(sql,bindings);
-    //     res.render('watch/search',{
-    //         watch
-    //     });
-    // });
-
-    // app.post('/watch/search', async function (req,res){
-    //     let sql = "select * from watch where 1"; 
-    //     const bindings = [];
-    //     if (req.query.searchTerms){
-    //         sql += ` and (brand like ? or model like ?)`;
-    //         bindings.push(`%${req.query.searchTerms}%`); 
-    //         bindings.push(`%${req.query.searchTerms}%`); 
-    //     }
-    //     const [watch] = await connection.execute(sql,bindings);
-    //     res.render('watch/search',{
-    //         watch
-    //     });
-    // });
-
-    // Search within watch (by XJ)
+    
     app.get('/watch/search', async function (req,res){
         let sql = "select * from watch where 1"; 
         const [watch] = await connection.execute(sql);
@@ -223,6 +193,6 @@ main();
 // });
 
 // PORT CHANGED
-app.listen(4000, () => {
+app.listen(8000, () => {
     console.log("server has started");
 });
