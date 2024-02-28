@@ -63,13 +63,36 @@ async function main() {
             sql += ` AND (brand like ? OR model like ?)`;
             bindings.push(`%${req.body.brandSearchTerms}%`); 
             bindings.push(`%${req.body.modelSearchTerms}%`); 
-        } if 
-        console.log(bindings)
+        } 
         const [watch] = await connection.execute(sql,bindings);
         res.render('watch/search',{
             watch
-        });
+        });    
     });
+
+    // app.post('/watch/search', async function (req, res) {
+    //     let sql = "SELECT * FROM watch WHERE 1"; 
+    //     const bindings = [];
+    
+    //     // Check if brand search term is provided
+    //     if (req.body.brandSearchTerms) {
+    //         sql += ` AND brand LIKE ?`;
+    //         bindings.push(`%${req.body.brandSearchTerms}%`); 
+    //     }
+    
+    //     // Check if model search term is provided
+    //     if (req.body.modelSearchTerms) {
+    //         sql += `${req.body.brandSearchTerms ? ' AND' : ''} model LIKE ?`;
+    //         bindings.push(`%${req.body.modelSearchTerms}%`); 
+    //     }
+    
+    //     // Execute the query
+    //     const [watch] = await connection.execute(sql, bindings);
+    
+    //     // Render the search results
+    //     res.render('watch/search', { watch });
+    // });
+    
 
     // displaying the form to create a new watch
     app.get('/watch/create', async function (req,res){
@@ -181,18 +204,10 @@ async function main() {
         })
     }); 
 
-    
-
-
-
 }
 main();
 
-// app.listen(3000, () => {
-//     console.log("server has started");
-// });
-
-// PORT CHANGED
-app.listen(8000, () => {
+app.listen(3000, () => {
     console.log("server has started");
 });
+
